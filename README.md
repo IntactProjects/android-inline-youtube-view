@@ -71,12 +71,12 @@ Create an instance of YouTubePlayerView inside a fragment. To initialize the pla
 3. webviewUrl : the link to iframe.html file (this is required when the device is not able to render native video, a fallback). By default, use 'https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html'
 4. playerType : native, webview or auto (try native, else fallback to webview)
 5. listener : callback listener
-6. fragment : fragment hosting this view
+6. fragmentManager : fragmentManager used to handle the YouTube player fragment
 7. imageLoader : to load thumbnail image
 
 ````java
 YouTubePlayerView playerView = new YouTubePlayerView(context);
-playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, listener, fragment, imageLoader);
+playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, listener, fragmentManager, imageLoader);
 
 ````
 
