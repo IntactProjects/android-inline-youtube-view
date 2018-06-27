@@ -223,8 +223,10 @@ public class YouTubePlayerView extends FrameLayout {
             View fragmentView = youTubeFragment.getView();
             ViewParent parentView = null != fragmentView ? fragmentView.getParent() : null;
             youTubeBaseFragment.release();
-            fragmentManager.beginTransaction().remove(youTubeFragment).commitAllowingStateLoss();
-            fragmentManager.executePendingTransactions();
+            fragmentManager
+                .beginTransaction()
+                .remove(youTubeFragment)
+                .commitNowAllowingStateLoss();
             if (parentView instanceof View && ((View) parentView).getId() == R.id.youtubeFragmentContainer) {
                 ((View) parentView).setId(0);
             }
