@@ -33,7 +33,7 @@ public class YouTubeNativeFragmentDemo extends Fragment {
         videoIds.add("ebXbLfLACGM");
         videoIds.add("mWRsgZuwf_8");
 
-        YouTubePlayerAdapter youTubePlayerAdapter = new YouTubePlayerAdapter(getContext(), videoIds, this, playerType);
+        YouTubePlayerAdapter youTubePlayerAdapter = new YouTubePlayerAdapter(getContext(), videoIds, getChildFragmentManager(), playerType);
         view.setAdapter(youTubePlayerAdapter);
 
         return view;

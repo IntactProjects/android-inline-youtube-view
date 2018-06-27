@@ -2,7 +2,7 @@ package com.flipkart.youtubeviewdemo.youtubenative;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,7 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
 
     private ArrayList<String> videoIds;
     private Context context;
-    private Fragment fragment;
+    private FragmentManager fragmentManager;
     private int playerType;
 
     private ImageLoader imageLoader = new ImageLoader() {
@@ -31,10 +31,10 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         }
     };
 
-    public YouTubePlayerAdapter(Context context, ArrayList<String> contents, Fragment fragment, int playerType) {
+    public YouTubePlayerAdapter(Context context, ArrayList<String> contents, FragmentManager fragmentManager, int playerType) {
         this.context = context;
         this.videoIds = contents;
-        this.fragment = fragment;
+        this.fragmentManager = fragmentManager;
         this.playerType = playerType;
     }
 
@@ -59,7 +59,7 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         YouTubePlayerView playerView = holder.playerView;
         String videoId = videoIds.get(position);
 
-        playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
+        playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragmentManager, imageLoader);
     }
 
     public static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {

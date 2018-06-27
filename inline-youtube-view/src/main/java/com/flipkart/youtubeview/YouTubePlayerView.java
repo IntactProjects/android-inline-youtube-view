@@ -56,7 +56,7 @@ public class YouTubePlayerView extends FrameLayout {
     private String videoId;
     @Nullable
     private YouTubeEventListener listener;
-    private Fragment fragment;
+    private FragmentManager fragmentManager;
 
     private String key;
     private FrameLayout playerContainer;
@@ -101,15 +101,16 @@ public class YouTubePlayerView extends FrameLayout {
     }
 
     @MainThread
-    public void initPlayer(@NonNull String apiKey, @NonNull String videoId, @Nullable String webViewUrl, @YouTubePlayerType int playerType,
-                           @Nullable YouTubeEventListener listener, @NonNull Fragment fragment, @NonNull ImageLoader imageLoader) {
+    public void initPlayer(@NonNull String apiKey, @NonNull String videoId, @Nullable String webViewUrl, 
+                           @YouTubePlayerType int playerType, @Nullable YouTubeEventListener listener, 
+                           @NonNull FragmentManager fragmentManager, @NonNull ImageLoader imageLoader) {
         if (TextUtils.isEmpty(videoId) || TextUtils.isEmpty(apiKey)) {
             throw new IllegalArgumentException("Video Id or key cannot be null");
         }
 
         //noinspection ConstantConditions
-        if (fragment == null) {
-            throw new IllegalArgumentException("Fragment cannot be null");
+        if (fragmentManager == null) {
+            throw new IllegalArgumentException("FragmentManager cannot be null");
         }
 
         //noinspection ConstantConditions
@@ -122,7 +123,7 @@ public class YouTubePlayerView extends FrameLayout {
         this.webViewUrl = webViewUrl;
         this.playerType = playerType;
         this.listener = listener;
-        this.fragment = fragment;
+        this.fragmentManager = fragmentManager;
         this.imageLoader = imageLoader;
     }
 
@@ -207,14 +208,14 @@ public class YouTubePlayerView extends FrameLayout {
 
             youtubePlayerFragment.setYouTubeEventListener(listener);
 
-            this.fragment.getChildFragmentManager().beginTransaction().add(R.id.youtubeFragmentContainer, (Fragment) youtubePlayerFragment, TAG)
+            this.fragmentManager.beginTransaction()
+                    .add(R.id.youtubeFragmentContainer, (Fragment) youtubePlayerFragment, TAG)
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit();
         }
     }
 
     private YouTubeBaseFragment removeCurrentYouTubeFragment() {
-        FragmentManager fragmentManager = fragment.getChildFragmentManager();
         Fragment youTubeFragment = fragmentManager.findFragmentByTag(TAG);
         YouTubeBaseFragment youTubeBaseFragment = null;
         if (youTubeFragment instanceof YouTubeBaseFragment) {
